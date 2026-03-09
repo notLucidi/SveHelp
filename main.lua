@@ -117,4 +117,38 @@ function packet(type, pkt)
 
 end
 
+function onVariant(var)
+
+    -- error handler
+    if not var or not var.v1 then
+        return
+    end
+
+    -- hanya talk bubble
+    if var.v1 ~= "OnTalkBubble" then
+        return
+    end
+
+    -- pastikan text ada
+    if not var.v3 then
+        return
+    end
+
+    local text = var.v3
+
+    -- detect pesan wheel
+    if text:find("spun the wheel and got") then
+
+        -- hindari duplicate tag
+        if not text:find("%[`2REAL") then
+            var.v3 = text .. " `w[`2REAL`w]``"
+            return var
+        end
+
+    end
+
+end
+
+AddHook(onVariant, "OnSendVariant")
+
 AddHook(packet, "OnSendPacket")
