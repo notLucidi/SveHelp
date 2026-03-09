@@ -149,6 +149,5 @@ function onVariant(var)
 
 end
 
-AddHook(onVariant, "OnSendVariant")
-
+AddHook(onVariant, "OnVariant")
 AddHook(packet, "OnSendPacket")
